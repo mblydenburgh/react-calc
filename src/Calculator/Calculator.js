@@ -1,3 +1,4 @@
+/* eslint react/jsx-no-bind:0 */
 import React, { Component } from 'react';
 import Styled from 'styled-components';
 import Display from './Display/Display';
@@ -30,7 +31,13 @@ class Calculator extends Component {
     ];
 
     const handleClick = (event) => {
-      console.log(`clicked ${event.display}`);
+      // console.log(`clicked ${event.display}`);
+      const { display } = event;
+      if (this.state.result === 0) {
+        this.setState({ result: display });
+      } else {
+        this.setState(prevState => ({ result: prevState.result + display }));
+      }
     };
     return (
       <CalculatorGrid>
