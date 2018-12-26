@@ -44,7 +44,6 @@ class Calculator extends Component {
     const handleOperator = (operator) => {
         // only allow an operator to be entered if a number has been entered
         if(this.state.result !== 0 && this.state.operator === false){ 
-            // console.log(`adding ${operator}`);
             this.setState(prevState => ({ result: prevState.result + operator }));
             this.setState({ operator: true });
         }
