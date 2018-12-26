@@ -1,14 +1,14 @@
 /* eslint react/jsx-no-bind:0 */
 import React, { Component } from 'react';
 import Styled from 'styled-components';
+import * as math from 'mathjs';
 import Display from './Display/Display';
 import Button from './Button/Button';
-import * as math from 'mathjs';
 
 class Calculator extends Component {
   state = {
     result: 0,
-    decimal : false,
+    decimal: false,
     operator: false,
   }
 
@@ -34,68 +34,67 @@ class Calculator extends Component {
     ];
 
     const clearDisplay = () => {
-        this.setState({
-            result: 0,
-            decimal: false,
-            operator: false,
-        });
+      this.setState({
+        result: 0,
+        decimal: false,
+        operator: false,
+      });
     };
-    
+
     const handleOperator = (operator) => {
-        // only allow an operator to be entered if a number has been entered
-        if(this.state.result !== 0 && this.state.operator === false){ 
-            this.setState(prevState => ({ result: prevState.result + operator }));
-            this.setState({ operator: true });
-        }
+      // only allow an operator to be entered if a number has been entered
+      if (this.state.result !== 0 && this.state.operator === false) {
+        this.setState(prevState => ({ result: prevState.result + operator }));
+        this.setState({ operator: true });
+      }
     };
-    
+
     const calculateResult = () => {
-        // console.log(math.eval(this.state.result));
-        const result = math.eval(`${this.state.result}`);
-        return result;
+      // console.log(math.eval(this.state.result));
+      const result = math.eval(`${this.state.result}`);
+      return result;
     };
 
     const handleClick = (event) => {
       // console.log(`clicked ${event.display}`);
       const { display, id } = event;
-      switch (id){
-          case 'clear':
-              // reset display
-              clearDisplay();
-              break;
-          case 'divide':
-          case 'multiply':
-          case 'add':
-          case 'subtract':
-              // insert the correct operator into calculator expression
-              const operator = display;
-              handleOperator(operator);
-              this.setState({ decimal: false });
-              break;
-          case 'decimal':
-              // handle decimals
-              if(this.state.decimal === false){
-                  this.setState(prevState => ({ result: prevState.result + display }));
-                  this.setState({ decimal:true });
-              }
-              break;
-          case 'equals':
-              // handle solving input
-              const result = calculateResult();
-              console.log(String(result));
-              this.setState({result:result});
-              break;
-          default:
-              // handle number input
-              // if display has "0", rewrite initial number
-              if (this.state.result == 0) { 
-                this.setState({ result: display });
-              } else {
-                this.setState(prevState => ({ result: prevState.result + display }));
-                this.setState({ operator:false });
-              }
+      switch (id) {
+        case 'clear':
+          // reset display
+          clearDisplay();
+          break;
+        case 'divide':
+        case 'multiply':
+        case 'add':
+        case 'subtract':
+          // insert the correct operator into calculator expression
+          const operator = display;
+          handleOperator(operator);
+          this.setState({ decimal: false });
+          break;
+        case 'decimal':
+          // handle decimals
+          if (this.state.decimal === false) {
+            this.setState(prevState => ({ result: prevState.result + display }));
+            this.setState({ decimal: true });
+          }
+          break;
+        case 'equals':
+          // handle solving input
+          const result = calculateResult();
+          console.log(String(result));
+          this.setState({ result });
+          break;
+        default:
+          // handle number input
+          // if display has "0", rewrite initial number
+          if (this.state.result == 0) { /* eslint eqeqeq: 0 */
+            this.setState({ result: display });
+          } else {
+            this.setState(prevState => ({ result: prevState.result + display }));
+            this.setState({ operator: false });
+          }
       }
-      
     };
     return (
       <CalculatorGrid>
