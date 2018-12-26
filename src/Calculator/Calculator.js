@@ -43,14 +43,35 @@ class Calculator extends Component {
     const handleOperator = (operator) => {
         // only allow an operator to be entered if a number has been entered
         if(this.state.result !== 0 && this.state.operator === false){ 
-            console.log(`adding ${operator}`);
+            // console.log(`adding ${operator}`);
             this.setState(prevState => ({ result: prevState.result + operator }));
             this.setState({ operator: true });
         }
     };
     
     const calculateResult = () => {
-        
+        const operatorRegex = /[X\/+-]/;
+        const expression = this.state.result;
+        const numbers = expression.split(operatorRegex);
+        const [num1,num2] = numbers;
+        // console.log(num1,num2);
+        const operationIndex = expression.search(operatorRegex);
+        const operator = expression[operationIndex];
+        // console.log(operator);
+        switch (operator){
+            case '+':
+                // add numbers
+                return (Number(num1) + Number(num2));
+            case '-':
+                // subtract numbers
+                return (Number(num1) - Number(num2));
+            case 'X':
+                // multiply numbers
+                return (Number(num1) * Number(num2));
+            case '/':
+                // divide numbers
+                return (Number(num1) / Number(num2));
+        }
     };
 
     const handleClick = (event) => {
@@ -74,7 +95,9 @@ class Calculator extends Component {
               break;
           case 'equals':
               // handle solving input
-              calculateResult();
+              const result = calculateResult();
+              console.log(String(result));
+              this.setState({result:result});
               break;
           default:
               // handle number input
