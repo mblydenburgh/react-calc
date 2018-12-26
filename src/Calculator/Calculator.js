@@ -89,9 +89,14 @@ class Calculator extends Component {
               // insert the correct operator into calculator expression
               const operator = display;
               handleOperator(operator);
+              this.setState({ decimal: false });
               break;
           case 'decimal':
               // handle decimals
+              if(this.state.decimal === false){
+                  this.setState(prevState => ({ result: prevState.result + display }));
+                  this.setState({ decimal:true });
+              }
               break;
           case 'equals':
               // handle solving input
