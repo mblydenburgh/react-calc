@@ -54,28 +54,6 @@ class Calculator extends Component {
         // console.log(math.eval(this.state.result));
         const result = math.eval(`${this.state.result}`);
         return result;
-        // const operatorRegex = /[X\/+-]/;
-        // const expression = this.state.result;
-        // const numbers = expression.split(operatorRegex);
-        // const [num1,num2] = numbers;
-        // // console.log(num1,num2);
-        // const operationIndex = expression.search(operatorRegex);
-        // const operator = expression[operationIndex];
-        // // console.log(operator);
-        // switch (operator){
-        //     case '+':
-        //         // add numbers
-        //         return (Number(num1) + Number(num2));
-        //     case '-':
-        //         // subtract numbers
-        //         return (Number(num1) - Number(num2));
-        //     case 'X':
-        //         // multiply numbers
-        //         return (Number(num1) * Number(num2));
-        //     case '/':
-        //         // divide numbers
-        //         return (Number(num1) / Number(num2));
-        // }
     };
 
     const handleClick = (event) => {
@@ -111,7 +89,7 @@ class Calculator extends Component {
           default:
               // handle number input
               // if display has "0", rewrite initial number
-              if (this.state.result === 0) { 
+              if (this.state.result == 0) { 
                 this.setState({ result: display });
               } else {
                 this.setState(prevState => ({ result: prevState.result + display }));
