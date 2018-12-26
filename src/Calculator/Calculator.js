@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Styled from 'styled-components';
 import Display from './Display/Display';
 import Button from './Button/Button';
+import * as math from 'mathjs';
 
 class Calculator extends Component {
   state = {
@@ -15,7 +16,7 @@ class Calculator extends Component {
     const buttons = [
       { display: 'A/C', id: 'clear' },
       { display: '/', id: 'divide' },
-      { display: 'X', id: 'multiply' },
+      { display: '*', id: 'multiply' },
       { display: '7', id: 'seven' },
       { display: '8', id: 'eight' },
       { display: '9', id: 'nine' },
@@ -50,28 +51,31 @@ class Calculator extends Component {
     };
     
     const calculateResult = () => {
-        const operatorRegex = /[X\/+-]/;
-        const expression = this.state.result;
-        const numbers = expression.split(operatorRegex);
-        const [num1,num2] = numbers;
-        // console.log(num1,num2);
-        const operationIndex = expression.search(operatorRegex);
-        const operator = expression[operationIndex];
-        // console.log(operator);
-        switch (operator){
-            case '+':
-                // add numbers
-                return (Number(num1) + Number(num2));
-            case '-':
-                // subtract numbers
-                return (Number(num1) - Number(num2));
-            case 'X':
-                // multiply numbers
-                return (Number(num1) * Number(num2));
-            case '/':
-                // divide numbers
-                return (Number(num1) / Number(num2));
-        }
+        // console.log(math.eval(this.state.result));
+        const result = math.eval(`${this.state.result}`);
+        return result;
+        // const operatorRegex = /[X\/+-]/;
+        // const expression = this.state.result;
+        // const numbers = expression.split(operatorRegex);
+        // const [num1,num2] = numbers;
+        // // console.log(num1,num2);
+        // const operationIndex = expression.search(operatorRegex);
+        // const operator = expression[operationIndex];
+        // // console.log(operator);
+        // switch (operator){
+        //     case '+':
+        //         // add numbers
+        //         return (Number(num1) + Number(num2));
+        //     case '-':
+        //         // subtract numbers
+        //         return (Number(num1) - Number(num2));
+        //     case 'X':
+        //         // multiply numbers
+        //         return (Number(num1) * Number(num2));
+        //     case '/':
+        //         // divide numbers
+        //         return (Number(num1) / Number(num2));
+        // }
     };
 
     const handleClick = (event) => {
@@ -111,6 +115,7 @@ class Calculator extends Component {
                 this.setState({ result: display });
               } else {
                 this.setState(prevState => ({ result: prevState.result + display }));
+                this.setState({ operator:false });
               }
       }
       
