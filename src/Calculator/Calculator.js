@@ -7,6 +7,8 @@ import Button from './Button/Button';
 class Calculator extends Component {
   state = {
     result: 0,
+    decimal : false,
+    operator: false,
   }
 
   render() {
@@ -30,14 +32,60 @@ class Calculator extends Component {
       { display: '.', id: 'decimal' },
     ];
 
+    const clearDisplay = () => {
+        this.setState({
+            result: 0,
+            decimal: false,
+            operator: false,
+        });
+    };
+    
+    const handleOperator = (operator) => {
+        // only allow an operator to be entered if a number has been entered
+        if(this.state.result !== 0 && this.state.operator === false){ 
+            console.log(`adding ${operator}`);
+            this.setState(prevState => ({ result: prevState.result + operator }));
+            this.setState({ operator: true });
+        }
+    };
+    
+    const calculateResult = () => {
+        
+    };
+
     const handleClick = (event) => {
       // console.log(`clicked ${event.display}`);
-      const { display } = event;
-      if (this.state.result === 0) {
-        this.setState({ result: display });
-      } else {
-        this.setState(prevState => ({ result: prevState.result + display }));
+      const { display, id } = event;
+      switch (id){
+          case 'clear':
+              // reset display
+              clearDisplay();
+              break;
+          case 'divide':
+          case 'multiply':
+          case 'add':
+          case 'subtract':
+              // insert the correct operator into calculator expression
+              const operator = display;
+              handleOperator(operator);
+              break;
+          case 'decimal':
+              // handle decimals
+              break;
+          case 'equals':
+              // handle solving input
+              calculateResult();
+              break;
+          default:
+              // handle number input
+              // if display has "0", rewrite initial number
+              if (this.state.result === 0) { 
+                this.setState({ result: display });
+              } else {
+                this.setState(prevState => ({ result: prevState.result + display }));
+              }
       }
+      
     };
     return (
       <CalculatorGrid>
