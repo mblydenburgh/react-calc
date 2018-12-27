@@ -42,17 +42,42 @@ class Calculator extends Component {
     };
 
     const handleOperator = (operator) => {
-      // only allow an operator to be entered if a number has been entered
-      if (this.state.result !== 0 && this.state.operator === false) {
-        this.setState(prevState => ({ result: prevState.result + operator }));
-        this.setState({ operator: true });
-      }
+
+        // only allow an operator to be entered if a number has been entered
+        if(this.state.result !== 0){ 
+            this.setState(prevState => ({ result: prevState.result + operator }));
+        }
+
     };
 
     const calculateResult = () => {
-      // console.log(math.eval(this.state.result));
-      const result = math.eval(`${this.state.result}`);
-      return result;
+
+        // console.log(math.eval(this.state.result));
+        let expression = this.state.result.split('');
+        const operatorRegex = /[+\-\/*]/;
+        console.log(expression);
+        // let removed = [];
+        for(let i = 0; i < expression.length; i++){
+            // check if letter is an operator
+            if(operatorRegex.test(expression[i])){
+                // if character is an operator, check if the next character is a operator
+                // if it is, remove the first operator and reset to beginning to loop
+                if(operatorRegex.test(expression[i+1])){
+                    expression.splice(i,1);
+                    i = 0;
+                }
+
+            }
+            // removed.push(expression[i]);
+        }
+        const fixedExpression = expression.join('');
+        console.log(fixedExpression);
+        // this.setState({ result:`${fixedExpression}` });
+
+        const result = math.eval(fixedExpression);
+        console.log(`result: ${result}`);
+        return result;
+
     };
 
     const handleClick = (event) => {
