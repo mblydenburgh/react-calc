@@ -53,7 +53,7 @@ class Calculator extends Component {
         let expression = this.state.result.split('');
         const operatorRegex = /[+\-\/*]/;
         console.log(expression);
-        let removed = [];
+        // let removed = [];
         for(let i = 0; i < expression.length; i++){
             // check if letter is an operator
             if(operatorRegex.test(expression[i])){
@@ -65,12 +65,13 @@ class Calculator extends Component {
                 }
 
             }
-            removed.push(expression[i]);
+            // removed.push(expression[i]);
         }
-        console.log(expression);
-        this.setState({ result:expression.join('') });
+        const fixedExpression = expression.join('');
+        console.log(fixedExpression);
+        // this.setState({ result:`${fixedExpression}` });
 
-        const result = math.eval(`${this.state.result}`);
+        const result = math.eval(fixedExpression);
         console.log(`result: ${result}`);
         return result;
     };
