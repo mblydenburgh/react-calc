@@ -17,6 +17,6 @@ const CalcDisplay = Styled.div`
     font-size: 2rem;
     text-align: right;
     padding: 2px 15px;
-    margin: 5px;
     grid-column: 1/-1;
+    margin-bottom: 2px;
 `;

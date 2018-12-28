@@ -4,6 +4,7 @@ import Styled from 'styled-components';
 import * as math from 'mathjs';
 import Display from './Display/Display';
 import Button from './Button/Button';
+import "typeface-roboto";
 
 class Calculator extends Component {
   state = {
@@ -138,7 +139,11 @@ export default Calculator;
 const CalculatorGrid = Styled.div`
     display: grid;
     grid-template-columns: repeat(4,1fr);
+    grid-gap: 2px;
     background-color: black;
     max-width:33%;
     margin: 3em auto;
+    box-shadow: 10px 10px 5px #333;
+    border-radius: 5px;
+    border: 5px solid black;
 `;

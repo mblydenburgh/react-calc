@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components'
+import "typeface-roboto";
 
 const Button = (props) => {
   let styles = {};
@@ -35,7 +36,9 @@ const ButtonDisplay = Styled.button`
   align-items: center;
   min-height: 100px;
   background-color: #aaa;
-  border: 1px solid black;
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+  border: 1px solid #666;
   
   &:active{
     transform: translateY(2px);
