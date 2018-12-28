@@ -17,11 +17,6 @@ const Button = (props) => {
   } else if (props.button.display === '0') {
     styles = {
       gridColumn: 'span 2',
-      background: '#aaa',
-    };
-  } else {
-    styles = {
-      background: '#aaa',
     };
   }
 
@@ -34,10 +29,16 @@ const Button = (props) => {
 
 export default Button;
 
-const ButtonDisplay = Styled.div`
+const ButtonDisplay = Styled.button`
   display: grid;
   justify-content: center;
   align-items: center;
   min-height: 100px;
+  background-color: #aaa;
   border: 1px solid black;
+  
+  &:active{
+    transform: translateY(2px);
+    background-color: #818181;
+  }
 `;
