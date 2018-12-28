@@ -115,7 +115,7 @@ class Calculator extends Component {
           // handle number input
           // if display has "0", rewrite initial number
           if (this.state.result == 0) { /* eslint eqeqeq: 0 */
-            this.setState({ result: display });
+            (this.state.decimal)?(this.setState({ result: `0.${display}` })):(this.setState({ result: display }));
           } else {
             this.setState(prevState => ({ result: prevState.result + display }));
             this.setState({ operator: false });
