@@ -145,5 +145,6 @@ const CalculatorGrid = Styled.div`
     margin: 3em auto;
     box-shadow: 10px 10px 5px #333;
     border-radius: 5px;
-    border: 5px solid black;
+    padding: 5px
+    border: 2px solid #818181;
 `;
